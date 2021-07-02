@@ -7,7 +7,18 @@
     android:background="@color/gainsboro"
     tools:context=".MainActivity">
 
-    <include layout="@layout/actionbar" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/actionbar" />
+
+    <ImageButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/addnote_button_shape"
+        android:src="@drawable/add_icon"
+        tools:layout_editor_absoluteX="305dp"
+        tools:layout_editor_absoluteY="614dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
