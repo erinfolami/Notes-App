@@ -9,7 +9,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/actionbar" />
+        layout="@layout/main_actionbar" />
 
     <ImageButton
         android:id="@+id/button"
