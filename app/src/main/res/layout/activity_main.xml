@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gainsboro"
+    android:background="@color/veryLightGrey"
     tools:context=".MainActivity">
 
     <include
@@ -12,13 +12,17 @@
         layout="@layout/main_actionbar" />
 
     <ImageButton
-        android:id="@+id/button"
+        android:id="@+id/addNotebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/addnote_button_shape"
         android:src="@drawable/add_icon"
-        tools:layout_editor_absoluteX="305dp"
-        tools:layout_editor_absoluteY="614dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.949" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

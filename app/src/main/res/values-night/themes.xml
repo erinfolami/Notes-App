@@ -12,5 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!--EditText hint color-->
+        <item name="android:textColorHint">@color/Buccaneer</item>
+        <!-- TextInputLayout text color-->
+        <item name="colorControlActivated">@color/black</item>
+        <!-- EditText line color when EditText on-focus-->
+        <item name="colorControlHighlight">@color/purple_500</item>
+        <!-- EditText line color when EditText  in un-focus-->
+        <item name="colorControlNormal">@color/black</item>
     </style>
 </resources>

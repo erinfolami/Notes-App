@@ -4,28 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gainsboro"
+    android:background="@color/veryLightGrey"
     tools:context=".addNoteActivity">
-    <include layout="@layout/addnotes_actionbar"/>
 
-    <TextView
+    <include
+        android:id="@+id/include4"
+        layout="@layout/addnotes_actionbar"
+        app:layout_constraintBottom_toTopOf="@+id/titleText"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
         android:id="@+id/titleText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/title"
-        android:textSize="22sp"
-        android:fontFamily="@font/schoolbell"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="74dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/note"
-        android:textSize="22sp"
-        android:fontFamily="@font/schoolbell"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="132dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:hint="@string/title"
+        android:background="@drawable/edittext_shape"
+        android:inputType="textCapSentences"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="3dp"
         />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="match_parent"
+        android:layout_height="530dp"
+        android:maxHeight="600dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:background="@drawable/edittext_shape"
+        android:gravity="top"
+        android:hint="@string/note"
+        android:inputType="textMultiLine"
+        android:isScrollContainer="true"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        tools:layout_editor_absoluteX="-7dp"
+
+        />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/save_button"
+        android:textColor="@color/black"
+        android:background="@drawable/save_button_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintVertical_bias="0.383" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

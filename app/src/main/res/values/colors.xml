@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gainsboro">#E3DDDD</color>
     <color name="paleSilver">#C8C0C0</color>
-    <color name="Matterhorn">#505050</color>
+    <color name="Matterhorn">#505050</color>281B1B
+    <color name="sealBrown">#281B1B</color>
+    <color name="veryLightGrey">#D6CCCC</color>
+    <color name="Buccaneer">#724545</color>
+
 </resources>
