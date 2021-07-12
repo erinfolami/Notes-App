@@ -12,6 +12,6 @@
     <color name="Matterhorn">#505050</color>281B1B
     <color name="sealBrown">#281B1B</color>
     <color name="veryLightGrey">#D6CCCC</color>
-    <color name="Buccaneer">#724545</color>
-
+    <color name="buccaneer">#724545</color>#A39696
+    <color name="dusty_grey">#A39696</color>
 </resources>

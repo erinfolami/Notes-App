@@ -1,67 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/veryLightGrey"
-    tools:context=".addNoteActivity">
+    tools:context=".activities.addNoteActivity">
 
     <include
-        android:id="@+id/include4"
-        layout="@layout/addnotes_actionbar"
-        app:layout_constraintBottom_toTopOf="@+id/titleText"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/addNoteActionbar"
+        layout="@layout/addnotes_actionbar" />
 
-    <EditText
-        android:id="@+id/titleText"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginStart="7dp"
-        android:hint="@string/title"
-        android:background="@drawable/edittext_shape"
-        android:inputType="textCapSentences"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="3dp"
-        />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/addNoteActionbar"
+        android:fillViewport="true">
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="match_parent"
-        android:layout_height="530dp"
-        android:maxHeight="600dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginStart="7dp"
-        android:background="@drawable/edittext_shape"
-        android:gravity="top"
-        android:hint="@string/note"
-        android:inputType="textMultiLine"
-        android:isScrollContainer="true"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@+id/titleText"
-        tools:layout_editor_absoluteX="-7dp"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        />
+            <EditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_shape"
+                android:hint="@string/title"
+                android:inputType="textCapSentences"
+                android:paddingLeft="5dp"
+                android:paddingStart="5dp"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                tools:layout_editor_absoluteX="3dp" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/save_button"
-        android:textColor="@color/black"
-        android:background="@drawable/save_button_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
-        app:layout_constraintVertical_bias="0.383" />
+            <EditText
+                android:id="@+id/note_EditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/titleEditText"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_shape"
+                android:gravity="top"
+                android:hint="@string/note"
+                android:inputType="textMultiLine"
+                android:paddingLeft="5dp"
+                android:paddingStart="5dp"
+                android:textColor="@color/black"
+                android:textSize="19sp"
+                app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
+        </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</RelativeLayout>

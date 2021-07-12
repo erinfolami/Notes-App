@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
 
         <!--EditText hint color-->
-        <item name="android:textColorHint">@color/Buccaneer</item>
+        <item name="android:textColorHint">@color/buccaneer</item>
         <!-- TextInputLayout text color-->
         <item name="colorControlActivated">@color/black</item>
         <!-- EditText line color when EditText on-focus-->
