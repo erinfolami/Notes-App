@@ -1,6 +1,5 @@
 package com.example.notes.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,8 +16,6 @@ import com.example.notes.models.Model;
 import com.example.notes.recyclerview.RecyclerViewAdapter;
 import com.example.notes.recyclerview.RecyclerViewItemTouchHelper;
 import com.example.notes.sqlite.DatabaseHandler;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 
 
 import java.util.List;
@@ -79,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void switchtoAddnoteActivity() {
-        Intent intent = new Intent(this, addNoteActivity.class);
+        Intent intent = new Intent(this, AddNoteActivity.class);
         startActivity(intent);
     }
 
