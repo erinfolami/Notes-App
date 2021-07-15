@@ -69,8 +69,7 @@ public class addNoteActivity extends AppCompatActivity {
 
                 //saves the model data to the database
                 DatabaseHandler databaseHandler = new DatabaseHandler(addNoteActivity.this);
-                boolean success_status = databaseHandler.insertData(model);
-                Log.i(TAG, "Save Data Success = " + success_status);
+                databaseHandler.insertData(model);
                 Toast.makeText(this, "Note Saved", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {

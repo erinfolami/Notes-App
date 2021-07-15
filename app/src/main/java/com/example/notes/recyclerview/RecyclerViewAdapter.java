@@ -36,10 +36,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.Notes.setText(modelList.get(position).getNote());
         holder.Title.setText(modelList.get(position).getTitle());
+
     }
 
     @Override
     public int getItemCount() {
-       return modelList.size();
+        return modelList.size();
     }
 }

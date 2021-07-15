@@ -13,11 +13,13 @@ public class Model {
 
     private String title;
     private String note;
+    private int id;
 
 
     @Override
     public String toString() {
         return "Model{" +
+                "ID='" + id + '\'' +
                 "title='" + title + '\'' +
                 ", note='" + note + '\'' +
                 '}';
@@ -39,5 +41,8 @@ public class Model {
         this.note = note;
     }
 
+    public void setId(int id){ this.id = id;}
+
+    public int getId(){return id;}
 
 }

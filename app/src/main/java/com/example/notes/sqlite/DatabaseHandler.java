@@ -39,6 +39,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + COLUMN_NAME_TITLE + " TEXT)";
 
         db.execSQL(CreateTableStatement);
+
     }
 
     // this is called when the version number of the database changes.
@@ -47,46 +48,97 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertData(Model model) {
+    public void insertData(Model model) {
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_NAME_NOTE, model.getNote());
-        cv.put(COLUMN_NAME_TITLE, model.getTitle());
+        // t's a good idea to wrap our insert in a transaction. This helps with performance and ensures
+        //consistency of the database.
+        db.beginTransaction();
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_NAME_NOTE, model.getNote());
+            cv.put(COLUMN_NAME_TITLE, model.getTitle());
 
-        long result = db.insert(TABLE_NAME, null, cv);
+            long result = db.insert(TABLE_NAME, null, cv);
 
-        if (result == -1) {
-            return false;
-        } else {
-            return true;
+            if (result == -1) {
+                Log.i(TAG, "Save Note Success = " + "False");
+            } else {
+                Log.i(TAG, "Save Note Success = " + "True");
+            }
+
+            db.setTransactionSuccessful();
+
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to add Note to database");
+            e.printStackTrace();
+            db.endTransaction();
+
+        } finally {
+            db.endTransaction();
+
         }
+
+
     }
 
     public List<Model> getAllData() {
         List<Model> returnList = new ArrayList<>();
 
         //get data from database
-        String queryString = "Select NOTE, TITLE FROM " + TABLE_NAME;
+        String queryString = "Select * FROM " + TABLE_NAME;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
+        try {
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+                    int id = cursor.getInt(0);
+                    String note = cursor.getString(1);
+                    String title = cursor.getString(2);
 
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                String note = cursor.getString(0);
-                String title = cursor.getString(1);
 
-                Model model = new Model(title, note);
-                returnList.add(model);
-            } while (cursor.moveToNext());
-        } else {
-            Log.i(TAG, "No Data Found");
+                    Model model = new Model(title, note);
+                    model.setId(id);
+                    returnList.add(model);
+                } while (cursor.moveToNext());
+            } else {
+                Log.i(TAG, "No Notes Found");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, "Error while trying to get Notes from database");
+        } finally {
+            cursor.close();
         }
-        cursor.close();
+
         return returnList;
 
+    }
+
+
+    public void deleteNote(Model model) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            int delete_count = db.delete(TABLE_NAME, "ID = ?", new String[] {Integer.toString(model.getId())} );
+            if (delete_count > 0) {
+                Log.i(TAG, "Note deleted successfully");
+                db.setTransactionSuccessful();
+            } else {
+                Log.i(TAG, "Note deleted Unsuccessfully");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Log.d(TAG,"Error while trying to delete Note");
+        }
+        finally {
+            db.endTransaction();
+        }
     }
 }
