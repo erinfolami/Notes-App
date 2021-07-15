@@ -23,8 +23,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     protected static RecyclerView recyclerView;
-    protected static RecyclerViewAdapter recyclerViewAdapter;
-    protected static List<Model> dataArrayList;
+    public static RecyclerViewAdapter recyclerViewAdapter;
+    public static List<Model> dataArrayList;
+    public static DatabaseHandler databaseHandler;
 
 
     @Override
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         //passing the RecyclerViewItemTouchHelper callback to the ItemTouchHelper constrctor,
         // to receives events when user performs these actions in the callback
         ItemTouchHelper recyclerViewItemTouchHelper =
-                new ItemTouchHelper(new RecyclerViewItemTouchHelper(MainActivity.this, dataArrayList, recyclerViewAdapter, recyclerView));
+                new ItemTouchHelper(new RecyclerViewItemTouchHelper(MainActivity.this, recyclerView));
         // attaches the touch helper to recycler view
         recyclerViewItemTouchHelper.attachToRecyclerView(recyclerView);
 
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         //data that will be displayed in the recyclerViewAdapter from sqlite database
-        DatabaseHandler databaseHandler = new DatabaseHandler(context);
+        databaseHandler = new DatabaseHandler(context);
         dataArrayList = databaseHandler.getAllData();
         //specifying the recyclerViewAdapter
         recyclerViewAdapter = new RecyclerViewAdapter(dataArrayList);

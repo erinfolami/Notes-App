@@ -1,7 +1,9 @@
 package com.example.notes.recyclerview;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -26,12 +28,11 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
     protected Context context;
 
 
-    public RecyclerViewItemTouchHelper(Context context, List<Model> dataArrayList, RecyclerViewAdapter recyclerViewAdapter, RecyclerView recyclerView) {
+    public RecyclerViewItemTouchHelper(Context context, RecyclerView recyclerView) {
         super(0, ItemTouchHelper.LEFT);
-        this.dataArrayList = dataArrayList;
-        this.recyclerViewAdapter = recyclerViewAdapter;
         this.recyclerView = recyclerView;
         this.context = context;
+
     }
 
     @Override
@@ -43,14 +44,14 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         // removes notes from RecyclerView
 
-
         Model deletedNote;
 
         //position of the ListItem that was swiped
         int position = viewHolder.getAbsoluteAdapterPosition();
 
-        //storing the note that will be deleted in a "deletedNote" variable before deletion
-        //in case a user Un-do's the delete
+//        storing the note that will be deleted in a "deletedNote" variable before deletion
+//        in case a user Un-do's the delete
+        dataArrayList = MainActivity.dataArrayList;
         deletedNote = dataArrayList.get(position);
 
         //Sets the swiped ListItem position to the ID variable in Model class
@@ -60,10 +61,11 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
         //removes the item from the List
         dataArrayList.remove(position);
         //notifies the recyclerViewAdapter an item has been removed
+        recyclerViewAdapter = MainActivity.recyclerViewAdapter;
         recyclerViewAdapter.notifyItemRemoved(position);
 
         //Creating a Snackbar to give an option to undo delete
-        int duration = Snackbar.LENGTH_LONG;
+        int duration = Snackbar.LENGTH_SHORT;
         String message = "Note deleted";
         Snackbar snackbar = Snackbar.make(recyclerView, message, duration);
         snackbar.setAction("Undo", new View.OnClickListener() {
@@ -89,8 +91,8 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
                 if (event != BaseTransientBottomBar.BaseCallback.DISMISS_EVENT_ACTION) {
 
 //                          //deletes the swiped note from database by using the ID
-                    DatabaseHandler databaseHandler = new DatabaseHandler(context);
-                    databaseHandler.deleteNote(model);
+                    MainActivity.databaseHandler.deleteNote(model);
+
                 }
             }
         });
