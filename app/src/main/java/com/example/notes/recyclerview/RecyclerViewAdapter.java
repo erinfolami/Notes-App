@@ -17,11 +17,9 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private List<Model> modelList;
-    private Context context;
 
-    public RecyclerViewAdapter(List<Model> modelList, Context context) {
+    public RecyclerViewAdapter(List<Model> modelList) {
         this.modelList = modelList;
-        this.context = context;
     }
 
     @NonNull

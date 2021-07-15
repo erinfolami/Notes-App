@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     protected static RecyclerViewAdapter recyclerViewAdapter;
     protected static List<Model> dataArrayList;
 
-//    protected Model deletedNote;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseHandler databaseHandler = new DatabaseHandler(context);
         dataArrayList = databaseHandler.getAllData();
         //specifying the recyclerViewAdapter
-        recyclerViewAdapter = new RecyclerViewAdapter(dataArrayList, context);
+        recyclerViewAdapter = new RecyclerViewAdapter(dataArrayList);
 
         recyclerView.setAdapter(recyclerViewAdapter);
     }
