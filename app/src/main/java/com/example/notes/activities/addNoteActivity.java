@@ -81,9 +81,7 @@ public class addNoteActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         saveNote();
-
         MainActivity.showNoteOnRecyclerView(addNoteActivity.this);
-
-        navigateBack();
+        finish();
     }
 }
