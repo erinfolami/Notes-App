@@ -1,14 +1,14 @@
 package com.example.notes.models;
 
 
-public class Model {
+public class NoteModel {
 
-    public Model(String title, String note) {
+    public NoteModel(String title, String note) {
         this.title = title;
         this.note = note;
     }
 
-    public Model() {
+    public NoteModel() {
     }
 
     private String title;
@@ -18,7 +18,7 @@ public class Model {
 
     @Override
     public String toString() {
-        return "Model{" +
+        return "NoteModel{" +
                 "ID='" + id + '\'' +
                 "title='" + title + '\'' +
                 ", note='" + note + '\'' +

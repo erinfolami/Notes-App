@@ -12,19 +12,20 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.example.notes.R;
-import com.example.notes.models.Model;
+import com.example.notes.models.NoteModel;
 import com.example.notes.recyclerview.RecyclerViewAdapter;
 import com.example.notes.recyclerview.RecyclerViewItemTouchHelper;
+import com.example.notes.recyclerview.RecyclerViewOnClickListener;
 import com.example.notes.sqlite.DatabaseHandler;
 
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewOnClickListener {
 
     protected static RecyclerView recyclerView;
     public static RecyclerViewAdapter recyclerViewAdapter;
-    public static List<Model> dataArrayList;
+    public static List<NoteModel> dataArrayList;
     public static DatabaseHandler databaseHandler;
 
 
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public static void showNoteOnRecyclerView(Context context) {
 
         //using a Linear Layout Manager
@@ -82,4 +84,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemClick(int Position) {
+
+    }
+
+    @Override
+    public void onLongItemClick(int Position) {
+
+    }
 }

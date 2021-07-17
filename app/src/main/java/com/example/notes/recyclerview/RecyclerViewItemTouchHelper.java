@@ -1,28 +1,30 @@
 package com.example.notes.recyclerview;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Canvas;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.notes.R;
 import com.example.notes.activities.MainActivity;
-import com.example.notes.models.Model;
-import com.example.notes.sqlite.DatabaseHandler;
+import com.example.notes.models.NoteModel;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 //This utility class  adds swipe to dismiss(delete,archive etc) and drag & drop support to RecyclerView.
 //This is a Callback class, which configures what type of interactions are enabled,
 
 public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
-    protected List<Model> dataArrayList;
+    protected List<NoteModel> dataArrayList;
     protected RecyclerViewAdapter recyclerViewAdapter;
     protected RecyclerView recyclerView;
     protected Context context;
@@ -44,7 +46,7 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         // removes notes from RecyclerView
 
-        Model deletedNote;
+        NoteModel deletedNote;
 
         //position of the ListItem that was swiped
         int position = viewHolder.getAbsoluteAdapterPosition();
@@ -54,9 +56,9 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
         dataArrayList = MainActivity.dataArrayList;
         deletedNote = dataArrayList.get(position);
 
-        //Sets the swiped ListItem position to the ID variable in Model class
-        Model model = new Model();
-        model.setId(dataArrayList.get(position).getId());
+        //Sets the swiped ListItem position to the ID variable in NoteModel class
+        NoteModel noteModel = new NoteModel();
+        noteModel.setId(dataArrayList.get(position).getId());
 
         //removes the item from the List
         dataArrayList.remove(position);
@@ -91,7 +93,7 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
                 if (event != BaseTransientBottomBar.BaseCallback.DISMISS_EVENT_ACTION) {
 
 //                          //deletes the swiped note from database by using the ID
-                    MainActivity.databaseHandler.deleteNote(model);
+                    MainActivity.databaseHandler.deleteData(noteModel);
 
                 }
             }
@@ -101,6 +103,17 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
 
     }
 
+    @Override
+    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+        new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                .addSwipeLeftBackgroundColor(ContextCompat.getColor(context, R.color.red))
+                .addSwipeLeftActionIcon(R.drawable.ic_deleteicon)
+                .create()
+                .decorate();
+
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+    }
 }
 
 

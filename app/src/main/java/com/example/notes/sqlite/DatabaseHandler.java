@@ -9,12 +9,12 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import com.example.notes.models.Model;
+import com.example.notes.models.NoteModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHandler extends SQLiteOpenHelper {
+public class   DatabaseHandler extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "notes.db";
     public static final int DATABASE_VERSION = 1;
@@ -48,7 +48,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public void insertData(Model model) {
+    public void insertData(NoteModel noteModel) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -57,11 +57,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             ContentValues cv = new ContentValues();
-            cv.put(COLUMN_NAME_NOTE, model.getNote());
-            cv.put(COLUMN_NAME_TITLE, model.getTitle());
+            cv.put(COLUMN_NAME_NOTE, noteModel.getNote());
+            cv.put(COLUMN_NAME_TITLE, noteModel.getTitle());
 
             long result = db.insert(TABLE_NAME, null, cv);
 
+            //// Checks if data insert succeeded
             if (result == -1) {
                 Log.i(TAG, "Save Note Success = " + "False");
             } else {
@@ -83,8 +84,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public List<Model> getAllData() {
-        List<Model> returnList = new ArrayList<>();
+    public List<NoteModel> getAllData() {
+        List<NoteModel> returnList = new ArrayList<>();
 
         //get data from database
         String queryString = "Select * FROM " + TABLE_NAME;
@@ -100,9 +101,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     String title = cursor.getString(2);
 
 
-                    Model model = new Model(title, note);
-                    model.setId(id);
-                    returnList.add(model);
+                    NoteModel noteModel = new NoteModel(title, note);
+                    noteModel.setId(id);
+                    returnList.add(noteModel);
                 } while (cursor.moveToNext());
             } else {
                 Log.i(TAG, "No Notes Found");
@@ -120,12 +121,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-    public void deleteNote(Model model) {
+    public void deleteData(NoteModel noteModel) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.beginTransaction();
         try {
-            int delete_count = db.delete(TABLE_NAME, "ID = ?", new String[] {Integer.toString(model.getId())} );
+            int delete_count = db.delete(TABLE_NAME, "ID = ?", new String[] {Integer.toString(noteModel.getId())} );
+            //// Checks if data delete succeeded
             if (delete_count > 0) {
                 Log.i(TAG, "Note deleted successfully");
                 db.setTransactionSuccessful();
@@ -140,5 +142,39 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         finally {
             db.endTransaction();
         }
+    }
+
+    public void updateData(NoteModel noteModel){
+        // The database connection is cached so it's not expensive to call getWriteableDatabase() multiple times.
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.beginTransaction();
+        try {
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_NAME_TITLE,noteModel.getTitle());
+            cv.put(COLUMN_NAME_NOTE,noteModel.getTitle());
+
+
+            int rows = db.update(TABLE_NAME, cv, "ID = ?", new String[] {Integer.toString(noteModel.getId())});
+            //// Checks if data insert succeeded
+            if (rows > 0){
+                Log.i(TAG, "Update Note Success = " + "True");
+                db.setTransactionSuccessful();
+            }
+            else {
+                Log.i(TAG, "Update Note Success = " + "False");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Log.d(TAG,"Error while trying to Update Note");
+        }
+        finally {
+            db.endTransaction();
+        }
+
+
+
+
     }
 }

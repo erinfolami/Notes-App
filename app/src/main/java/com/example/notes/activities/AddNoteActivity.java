@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.notes.R;
-import com.example.notes.models.Model;
+import com.example.notes.models.NoteModel;
 import com.example.notes.sqlite.DatabaseHandler;
 
 
@@ -52,11 +52,11 @@ public class AddNoteActivity extends AppCompatActivity {
         try {
             //puts notes,title data from the UI elements to the model class
             if (title.getText().length() > 0 || note.getText().length() > 0) {
-                Model model = new Model(title.getText().toString(), note.getText().toString());
+                NoteModel noteModel = new NoteModel(title.getText().toString(), note.getText().toString());
 
-                //saves the model data to the database
+                //saves the noteModel data to the database
                 DatabaseHandler databaseHandler = new DatabaseHandler(AddNoteActivity.this);
-                databaseHandler.insertData(model);
+                databaseHandler.insertData(noteModel);
                 Toast.makeText(this, "Note Saved", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {

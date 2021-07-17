@@ -1,6 +1,5 @@
 package com.example.notes.recyclerview;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.notes.R;
-import com.example.notes.models.Model;
+import com.example.notes.models.NoteModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-    private List<Model> modelList;
+    private List<NoteModel> noteModelList;
 
-    public RecyclerViewAdapter(List<Model> modelList) {
-        this.modelList = modelList;
+    public RecyclerViewAdapter(List<NoteModel> noteModelList) {
+        this.noteModelList = noteModelList;
     }
 
     @NonNull
@@ -32,13 +30,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.Notes.setText(modelList.get(position).getNote());
-        holder.Title.setText(modelList.get(position).getTitle());
+        holder.Notes.setText(noteModelList.get(position).getNote());
+        holder.Title.setText(noteModelList.get(position).getTitle());
 
     }
 
     @Override
     public int getItemCount() {
-        return modelList.size();
+        return noteModelList.size();
     }
 }
