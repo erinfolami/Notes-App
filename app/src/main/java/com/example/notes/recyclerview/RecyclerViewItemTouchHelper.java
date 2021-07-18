@@ -107,7 +107,7 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
         new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                .addSwipeLeftBackgroundColor(ContextCompat.getColor(context, R.color.red))
+                .addSwipeLeftBackgroundColor(ContextCompat.getColor(context, R.color.tomato))
                 .addSwipeLeftActionIcon(R.drawable.ic_deleteicon)
                 .create()
                 .decorate();

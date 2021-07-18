@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/notes_card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="78dp"
     app:cardCornerRadius="14dp"
     app:cardBackgroundColor="@color/paleSilver"
     android:layout_marginBottom="15dp">
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            android:padding="3dp"
+            android:padding="4dp"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -31,7 +31,7 @@
             android:layout_below="@+id/title_textView"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
-            android:maxLines="8"
+            android:maxLines="5"
             android:padding="3dp"
             android:textColor="@color/black"
             android:textSize="15sp" />
