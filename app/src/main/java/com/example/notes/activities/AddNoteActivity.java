@@ -26,9 +26,9 @@ public class AddNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_note);
 
-        backButton = findViewById(R.id.back_button);
-        title = findViewById(R.id.titleEditText);
-        note = findViewById(R.id.note_EditText);
+        backButton = findViewById(R.id.addnote_back_button);
+        title = findViewById(R.id.addTitle_EditText);
+        note = findViewById(R.id.addNote_EditText);
 
 
         backButton.setOnClickListener(new View.OnClickListener() {

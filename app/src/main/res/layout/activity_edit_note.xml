@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/veryLightGrey"
-    tools:context=".activities.AddNoteActivity">
+    tools:context=".activities.EditNoteActivity">
 
     <include
-        android:id="@+id/addNoteActionbar"
-        layout="@layout/addnotes_actionbar" />
+        android:id="@+id/editNoteActionbar"
+        layout="@layout/editnotes_actionbar" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/addNoteActionbar"
+        android:layout_below="@+id/editNoteActionbar"
         android:fillViewport="true">
 
         <RelativeLayout
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/addTitle_EditText"
+                android:id="@+id/editTitleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:layout_marginTop="30dp"
@@ -36,10 +36,10 @@
                 tools:layout_editor_absoluteX="3dp" />
 
             <EditText
-                android:id="@+id/addNote_EditText"
+                android:id="@+id/editNote_EditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/addTitle_EditText"
+                android:layout_below="@+id/editTitleEditText"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edittext_shape"
                 android:gravity="top"
@@ -49,7 +49,7 @@
                 android:paddingStart="5dp"
                 android:textColor="@color/black"
                 android:textSize="19sp"
-                app:layout_constraintTop_toBottomOf="@+id/addTitle_EditText" />
+                app:layout_constraintTop_toBottomOf="@+id/editTitleEditText" />
         </RelativeLayout>
 
     </ScrollView>

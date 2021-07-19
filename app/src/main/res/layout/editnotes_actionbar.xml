@@ -7,21 +7,20 @@
     android:background="@color/dusty_grey">
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/schoolbell"
         android:paddingLeft="55dp"
         android:paddingTop="10dp"
         android:paddingBottom="8dp"
-        android:text="@string/add_notes"
+        android:text="@string/edit_notes"
         android:textColor="@color/black"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/addnote_back_button"
+        android:id="@+id/editnote_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

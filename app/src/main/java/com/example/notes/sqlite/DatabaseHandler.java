@@ -152,7 +152,7 @@ public class   DatabaseHandler extends SQLiteOpenHelper {
         try {
             ContentValues cv = new ContentValues();
             cv.put(COLUMN_NAME_TITLE,noteModel.getTitle());
-            cv.put(COLUMN_NAME_NOTE,noteModel.getTitle());
+            cv.put(COLUMN_NAME_NOTE,noteModel.getNote());
 
 
             int rows = db.update(TABLE_NAME, cv, "ID = ?", new String[] {Integer.toString(noteModel.getId())});

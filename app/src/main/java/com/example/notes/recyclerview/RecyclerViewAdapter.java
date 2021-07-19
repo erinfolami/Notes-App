@@ -16,8 +16,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private List<NoteModel> noteModelList;
 
+    private RecyclerViewOnClickListener recyclerViewOnClickListener;
+
     public RecyclerViewAdapter(List<NoteModel> noteModelList) {
         this.noteModelList = noteModelList;
+    }
+
+    public void setRecyclerViewOnClickListener(RecyclerViewOnClickListener recyclerViewOnClickListener){
+        this.recyclerViewOnClickListener = recyclerViewOnClickListener;
     }
 
     @NonNull
@@ -25,7 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notes_cardview, parent, false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, recyclerViewOnClickListener);
     }
 
     @Override
