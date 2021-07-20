@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
         android:background="@color/veryLightGrey"
+        android:paddingStart="5dp"
         android:paddingLeft="5dp"
         android:scrollbars="vertical"
         tools:layout_editor_absoluteX="0dp"
@@ -28,15 +29,11 @@
         android:id="@+id/addNotebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
         android:contentDescription="@string/add_note"
         android:src="@drawable/add_icon"
-        app:backgroundTint="@color/dusty_grey"/>
+        app:backgroundTint="@color/dusty_grey" />
 
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
