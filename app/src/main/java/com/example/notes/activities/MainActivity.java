@@ -1,6 +1,7 @@
 package com.example.notes.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -106,6 +109,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddNoteActivity.class);
         startActivity(intent);
     }
-
 
 }

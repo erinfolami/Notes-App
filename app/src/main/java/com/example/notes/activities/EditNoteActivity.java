@@ -1,7 +1,9 @@
 package com.example.notes.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,7 @@ public class EditNoteActivity extends AppCompatActivity {
     private ImageView backButton;
     private EditText title;
     private EditText note;
+    private ImageView clearNote;
 
 
     @Override
@@ -32,6 +35,7 @@ public class EditNoteActivity extends AppCompatActivity {
         backButton = findViewById(R.id.editnote_back_button);
         title = findViewById(R.id.editTitleEditText);
         note = findViewById(R.id.editNote_EditText);
+        clearNote = findViewById(R.id.clear_all_editText);
 
         //gets the intent extra (data) from the Mainactivity
         Intent receivedIntent = getIntent();
@@ -50,6 +54,13 @@ public class EditNoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 navigateBack();
+            }
+        });
+
+        clearNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearNoteText();
             }
         });
 
@@ -79,6 +90,26 @@ public class EditNoteActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    public void clearNoteText(){
+        if (note.getText().length() > 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Are you sure you want to clear Note text");
+
+            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    note.getText().clear();
+                }
+            });
+
+            builder.setNegativeButton(R.string.cancel, null);
+
+            builder.create()
+                    .show();
         }
 
     }

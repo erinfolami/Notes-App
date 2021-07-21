@@ -21,6 +21,7 @@
         android:paddingStart="5dp"
         android:paddingLeft="5dp"
         android:scrollbars="vertical"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="100dp" />
 

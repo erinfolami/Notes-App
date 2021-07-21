@@ -6,4 +6,6 @@
     <string name="save_button">Save</string>
     <string name="add_note">Add Note</string>
     <string name="edit_notes">Edit Notes</string>
+    <string name="yes">Yes</string>
+    <string name="cancel">Cancel</string>
 </resources>
