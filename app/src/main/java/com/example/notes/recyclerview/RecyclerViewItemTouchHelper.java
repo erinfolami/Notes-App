@@ -15,6 +15,7 @@ import com.example.notes.models.NoteModel;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Collections;
 import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
@@ -31,14 +32,24 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
 
 
     public RecyclerViewItemTouchHelper(Context context, RecyclerView recyclerView) {
-        super(0, ItemTouchHelper.LEFT);
+        super(ItemTouchHelper.UP | ItemTouchHelper.DOWN |
+                ItemTouchHelper.START | ItemTouchHelper.END, ItemTouchHelper.LEFT);
         this.recyclerView = recyclerView;
         this.context = context;
+        this.recyclerViewAdapter = MainActivity.recyclerViewAdapter;
+        this.dataArrayList = MainActivity.dataArrayList;
 
     }
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+        int fromPosition = viewHolder.getAbsoluteAdapterPosition();
+        int toPosition = target.getAbsoluteAdapterPosition();
+
+        Collections.swap(MainActivity.dataArrayList, fromPosition, toPosition);
+
+        recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
+
         return false;
     }
 
@@ -53,7 +64,6 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
 
 //        storing the note that will be deleted in a "deletedNote" variable before deletion
 //        in case a user Un-do's the delete
-        dataArrayList = MainActivity.dataArrayList;
         deletedNote = dataArrayList.get(position);
 
         //Sets the swiped ListItem position to the ID variable in NoteModel class
@@ -63,7 +73,6 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
         //removes the item from the List
         dataArrayList.remove(position);
         //notifies the recyclerViewAdapter an item has been removed
-        recyclerViewAdapter = MainActivity.recyclerViewAdapter;
         recyclerViewAdapter.notifyItemRemoved(position);
 
         //Creating a Snackbar to give an option to undo delete
