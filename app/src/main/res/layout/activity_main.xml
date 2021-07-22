@@ -34,7 +34,7 @@
         android:layout_margin="16dp"
         android:contentDescription="@string/add_note"
         android:src="@drawable/add_icon"
-        app:backgroundTint="@color/dusty_grey" />
+        app:backgroundTint="@color/fab_background_color" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
