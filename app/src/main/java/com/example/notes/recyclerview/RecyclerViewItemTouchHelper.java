@@ -25,8 +25,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
-    protected List<NoteModel> dataArrayList;
-    protected RecyclerViewAdapter recyclerViewAdapter;
+
     protected RecyclerView recyclerView;
     protected Context context;
 
@@ -36,8 +35,6 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
                 ItemTouchHelper.START | ItemTouchHelper.END, ItemTouchHelper.LEFT);
         this.recyclerView = recyclerView;
         this.context = context;
-        this.recyclerViewAdapter = MainActivity.recyclerViewAdapter;
-        this.dataArrayList = MainActivity.dataArrayList;
 
     }
 
@@ -64,6 +61,7 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
 
 //        storing the note that will be deleted in a "deletedNote" variable before deletion
 //        in case a user Un-do's the delete
+        List<NoteModel> dataArrayList = MainActivity.dataArrayList;
         deletedNote = dataArrayList.get(position);
 
         //Sets the swiped ListItem position to the ID variable in NoteModel class
@@ -73,6 +71,7 @@ public class RecyclerViewItemTouchHelper extends ItemTouchHelper.SimpleCallback 
         //removes the item from the List
         dataArrayList.remove(position);
         //notifies the recyclerViewAdapter an item has been removed
+        RecyclerViewAdapter recyclerViewAdapter = MainActivity.recyclerViewAdapter;
         recyclerViewAdapter.notifyItemRemoved(position);
 
         //Creating a Snackbar to give an option to undo delete
