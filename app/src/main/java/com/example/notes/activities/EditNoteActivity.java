@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.notes.R;
 import com.example.notes.models.NoteModel;
 import com.example.notes.sqlite.DatabaseHandler;
+import com.example.notes.utils.NoteHandler;
 
 public class EditNoteActivity extends AppCompatActivity {
 
@@ -60,7 +61,7 @@ public class EditNoteActivity extends AppCompatActivity {
         clearNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearNoteText();
+                NoteHandler.clearNoteText(note, EditNoteActivity.this);
             }
         });
 
@@ -73,52 +74,20 @@ public class EditNoteActivity extends AppCompatActivity {
 
 
     public void navigateBack() {
-        updateNote();
-        MainActivity.showNoteOnRecyclerView(EditNoteActivity.this);
         finish();
     }
 
-    public void updateNote() {
-        try {
-            //puts notes,title data from the UI elements to the model class and updates it in the database
-            if (title.getText().length() > 0 || note.getText().length() > 0) {
-                NoteModel noteModel = new NoteModel(title.getText().toString(), note.getText().toString());
-                noteModel.setId(selectedId);
-//               puts the updated data to the database
-                DatabaseHandler databaseHandler = new DatabaseHandler(EditNoteActivity.this);
-                databaseHandler.updateData(noteModel);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void clearNoteText(){
-        if (note.getText().length() > 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Are you sure you want to clear Note text");
-
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    note.getText().clear();
-                }
-            });
-
-            builder.setNegativeButton(R.string.cancel, null);
-
-            builder.create()
-                    .show();
-        }
-
-    }
 
     @Override
-    public void onBackPressed() {
-        updateNote();
+    protected void onStop() {
+        // call the superclass method first
+        super.onStop();
+
+        // update the note's current draft, because the activity is stopping
+        // and we want to be sure the current note progress isn't lost.
+        NoteHandler.updateNote(title, note, selectedId, this);
         MainActivity.showNoteOnRecyclerView(EditNoteActivity.this);
-        finish();
     }
+
 
 }

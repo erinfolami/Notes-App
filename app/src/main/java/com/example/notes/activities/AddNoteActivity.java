@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.example.notes.R;
 import com.example.notes.models.NoteModel;
 import com.example.notes.sqlite.DatabaseHandler;
+import com.example.notes.utils.NoteHandler;
 
 
 public class AddNoteActivity extends AppCompatActivity {
@@ -23,6 +25,8 @@ public class AddNoteActivity extends AppCompatActivity {
 
 
     private static final String TAG = "AddNoteActivity";
+
+    private boolean added = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,7 @@ public class AddNoteActivity extends AppCompatActivity {
         clearNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearNoteText();
+                NoteHandler.clearNoteText(note, AddNoteActivity.this);
             }
         });
 
@@ -54,52 +58,32 @@ public class AddNoteActivity extends AppCompatActivity {
 
 
     public void navigateBack() {
-        saveNote();
-        MainActivity.showNoteOnRecyclerView(AddNoteActivity.this);
         finish();
     }
 
-    public void saveNote() {
-        try {
-            //puts notes,title data from the UI elements to the model class
-            if (title.getText().length() > 0 || note.getText().length() > 0) {
-                NoteModel noteModel = new NoteModel(title.getText().toString(), note.getText().toString());
-
-                //saves the noteModel data to the database
-                DatabaseHandler databaseHandler = new DatabaseHandler(AddNoteActivity.this);
-                databaseHandler.insertData(noteModel);
-                Toast.makeText(this, "Note Saved", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void clearNoteText(){
-        if (note.getText().length() > 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Are you sure you want to clear Note text");
-
-            builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    note.getText().clear();
-                }
-            });
-
-            builder.setNegativeButton(R.string.cancel, null);
-
-            builder.create()
-                    .show();
-        }
-
-    }
 
     @Override
-    public void onBackPressed() {
-        saveNote();
-        MainActivity.showNoteOnRecyclerView(AddNoteActivity.this);
-        finish();
+    protected void onStop() {
+        // call the superclass method first
+        super.onStop();
+
+        //The 'added' flag ensures the note is saved only once
+        if (added == false) {
+            added = true;
+            // save the note's current draft, because the activity is stopping
+            // and we want to be sure the current note progress isn't lost.
+            NoteHandler.saveNote(title, note, this);
+            MainActivity.showNoteOnRecyclerView(AddNoteActivity.this);
+        }
+        // If the flag becomes true then changes  in the note will only be updated
+        else {
+            //get the last item in the dataArrayList( to get the id of the item that was saved lastly)
+            NoteModel data = MainActivity.dataArrayList.get(MainActivity.dataArrayList.size() - 1);
+            int selectedId = data.getId();
+
+//            updates the changes in the current note
+            NoteHandler.updateNote(title, note, selectedId, this);
+            MainActivity.showNoteOnRecyclerView(AddNoteActivity.this);
+        }
     }
 }
