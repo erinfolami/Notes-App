@@ -5,12 +5,12 @@ The note app is easy to use and stores data on your own device, as confidential 
 be stored encrypted.
 
 ### Features
- Auto-Save
- Swipe to delete
- Un-do delete
- Move notes to desired position
- Material design
- Supports Android 5.1 (Lollipop) and above
+ Auto-Save <br />
+ Swipe to delete <br />
+ Un-do delete <br />
+ Move notes to desired position <br />
+ Material design <br />
+ Supports Android 5.1 (Lollipop) and above <br />
 
 ### Downloads
  Playstore installation in progress, still in testing phase.
