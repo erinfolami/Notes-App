@@ -13,14 +13,13 @@ be stored encrypted.
  Supports Android 5.1 (Lollipop) and above
 
 # Downloads
- Playsore installation in progress, still in testing phase.
+ Playstore installation in progress, still in testing phase.
  You can simply clone the repository/ generate an apk file
 
 # Screenshots
 
-  
-  
-<a href="https://files.slack.com/files-pri/T56F1DX7C-F02BG0HAEHJ/screenshot_20210816-100733.png" width="100" height="100"/></a>
+ 
+ <img src="  ![Screenshot_20210816-100711](https://user-images.githubusercontent.com/50245033/130942834-beff01d1-c20c-478a-9baf-0da38219c984.png)" width="100" height="100">
 
   
  
